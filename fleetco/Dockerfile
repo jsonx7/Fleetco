@@ -5,9 +5,9 @@ RUN sed -i 's|deb.debian.org|archive.debian.org|g; s|security.debian.org|archive
  && echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/99no-check-valid
 
 RUN apt-get update \
- && apt-get install -y --no-install-recommends --allow-unauthenticated libpng-dev libjpeg-dev libfreetype6-dev \
+ && apt-get install -y --no-install-recommends --allow-unauthenticated libpng-dev libjpeg-dev libfreetype6-dev libmcrypt-dev \
  && docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr --with-freetype-dir=/usr \
- && docker-php-ext-install gd mysql mysqli mbstring \
+ && docker-php-ext-install gd mysql mysqli mbstring mcrypt \
  && rm -rf /var/lib/apt/lists/*
 
 COPY . /var/www/html/
